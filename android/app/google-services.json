@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "20696203693",
+    "project_id": "inshare-fed44",
+    "storage_bucket": "inshare-fed44.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:20696203693:android:c601997b8caa23a8546124",
+        "android_client_info": {
+          "package_name": "com.example.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBF84mH6mbCanx9XdmuZ1LNerbTmXqr9oE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:20696203693:android:36b880fcdccf8725546124",
+        "android_client_info": {
+          "package_name": "com.example.myapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBF84mH6mbCanx9XdmuZ1LNerbTmXqr9oE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
