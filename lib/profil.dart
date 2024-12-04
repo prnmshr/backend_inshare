@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
-import 'newpost.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'login.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
-  // Ubah ke StatefulWidget
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  // Buat State
   int _currentIndex = 3; // Inisialisasi currentIndex
+
+  // Daftar gambar untuk post grid
+  final List<String> postImages = [
+    'assets/images/post1.png', // Gambar pertama
+    'assets/images/post2.png', // Gambar kedua
+    'assets/images/post3.png', // Gambar ketiga
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -20,18 +25,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        centerTitle: false, // Supaya title di kiri
-        title: const Row(
+        automaticallyImplyLeading: false,
+        centerTitle: false,
+        title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
+            const Text(
               'Nanad_manda',
               style: TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Icon(Icons.arrow_drop_down, color: Colors.black),
+            GestureDetector(
+              onTap: () {
+                // Navigasi ke LoginScreen
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginScreen()),
+                );
+              },
+              child: const PhosphorIcon(
+                PhosphorIconsRegular.signOut,
+                color: Colors.black,
+              ),
+            ),
           ],
         ),
       ),
@@ -48,8 +66,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       // Profile Image
                       CircleAvatar(
                         radius: 50,
-                        backgroundImage: NetworkImage(
-                          'https://via.placeholder.com/150', // Ganti dengan URL gambar profil Anda
+                        backgroundImage: AssetImage(
+                          'assets/images/Profile.png',
                         ),
                       ),
                       SizedBox(width: 16),
@@ -100,7 +118,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const NewPostPage(),
+                            builder: (context) => const LoginScreen(),
                           ),
                         );
                       },
@@ -116,7 +134,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             const Divider(thickness: 1),
             // Tabs (Posts)
             const Padding(
-              padding: EdgeInsets.symmetric(vertical: 3.0),
+              padding: EdgeInsets.symmetric(vertical: 8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -129,29 +147,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ],
               ),
             ),
-            const Divider(thickness: 1),
+
             // Post Grid
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(0.5),
               child: GridView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
-                  crossAxisSpacing: 8,
-                  mainAxisSpacing: 8,
+                  crossAxisSpacing: 1,
+                  mainAxisSpacing: 1,
                 ),
-                itemCount: 3, // Sesuaikan dengan jumlah postingan
+                itemCount: postImages.length, // Jumlah gambar
                 itemBuilder: (context, index) {
                   return Container(
                     decoration: BoxDecoration(
-                      image: const DecorationImage(
-                        image: NetworkImage(
-                          'https://via.placeholder.com/150', // Ganti dengan URL gambar postingan Anda
-                        ),
+                      image: DecorationImage(
+                        image:
+                            AssetImage(postImages[index]), // Gambar dari daftar
                         fit: BoxFit.cover,
                       ),
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(0),
                     ),
                   );
                 },
@@ -165,8 +182,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
         type: BottomNavigationBarType.fixed,
         onTap: (index) {
           setState(() {
-            _currentIndex = index; // Update state saat item dipilih
+            _currentIndex = index;
           });
+
+          if (index == 2) {
+            // New Post
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const LoginScreen()),
+            );
+          } else if (index == 1) {
+            // Explore
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const LoginScreen()),
+            );
+          }
         },
         items: [
           BottomNavigationBarItem(
@@ -234,7 +265,7 @@ class StatColumn extends StatelessWidget {
   final String title;
   final String subtitle;
 
-  const StatColumn({super.key, required this.title, required this.subtitle});
+  const StatColumn({required this.title, required this.subtitle, super.key});
 
   @override
   Widget build(BuildContext context) {
